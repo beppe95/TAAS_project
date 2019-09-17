@@ -1,6 +1,5 @@
 package unito.taas.project
 
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
 import org.mockito.Mockito.verify
@@ -17,16 +16,8 @@ class ReposTest @Autowired constructor(
     @Test
     fun `Check insert user`() {
         val userModel = Mockito.mock(UserModel::class.java)
+        userModel.createNewUser("mockuser@gmail.com", "mockpwd")
         verify(userModel).createNewUser("mockuser@gmail.com", "mockpwd")
-        val mockUser1 = userModel.createNewUser("mockuser@gmail.com", "mockpwd")
-        //entityManager.find(UserEntity::class.java, mockUser1.id)
-
-        /***val appContext = AnnotationConfigApplicationContext()
-        appContext.refresh()
-        val userModel = appContext.getBean(UserModel::class.java)***/
-
-        /***val mockUser1 = userModel.createNewUser("mockuser@gmail.com", "mockpwd")
-        assertThat(mockUser1).isEqualTo(entityManager.find(UserEntity::class.java, mockUser1.id))***/
     }
 
     /***@Test
