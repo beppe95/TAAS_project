@@ -9,7 +9,7 @@ import javax.validation.Valid
 class UserController(private val userModel: UserModel) {
 
     @GetMapping("/users")
-    fun getAllUsers(): Iterable<UserEntity> =
+    fun getAllUsers(): List<UserEntity> =
             userModel.findAllUsers()
 
     @GetMapping("/users/")
