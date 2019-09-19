@@ -1,19 +1,16 @@
 package unito.taas.project.user
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 import javax.validation.constraints.NotBlank
 
 @Entity
-data class UserEntity (
-        @Id @NotBlank @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long? = 0,
+data class UserEntity(
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+        val id: Long? = null,
 
-        @get: NotBlank
-        val mailAddress: String = "",
+        @NotBlank @Column(unique=true)
+        val mailAddress: String,
 
-        @get: NotBlank
-        val password: String = ""
+        @NotBlank
+        var password: String
 )

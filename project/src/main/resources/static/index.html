@@ -9,21 +9,34 @@
     <body>
         <br> Welcome! <br>
 
-        <form action="/api/users">
+        <form action="/api/users" method="post">
             Get All Users:
             <input type="submit" value="Submit">
         </form>
 
-        <form action="/api/users/">
+        <form action="/api/get-user/" method="post">
             Find By Id:
             <input type="number" name="id">
             <input type="submit" value="Submit">
         </form>
 
-        <form action="/api/users" method="post">
+        <form action="/api/new-user" method="post">
             Add New User:
             <input type = "email" name="mailAddress">
             <input type = "password" name="password">
+            <input type ="submit" value="Submit">
+        </form>
+
+        <form action="/api/update-user" method="post">
+            Update User Password:
+            <input type = "number" name="id">
+            <input type = "password" name="password">
+            <input type ="submit" value="Submit">
+        </form>
+
+        <form action="/api/delete-user" method="post">
+            Delete User:
+            <input type = "number" name="id">
             <input type ="submit" value="Submit">
         </form>
 
