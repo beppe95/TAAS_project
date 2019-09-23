@@ -1,6 +1,7 @@
 package unito.taas.project.user
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import unito.taas.project.HtmlController
@@ -24,10 +25,12 @@ class UserController (@Autowired private val userRepository: UserRepository,
     fun createNewUser(@Valid @RequestParam mailAddress: String,
                       @Valid @RequestParam password: String): ResponseEntity<UserEntity> =
             ResponseEntity.ok(userRepository.saveAndFlush(UserEntity(mailAddress = mailAddress, password = password)))
+    // bCryptPasswordEncoder.encode(password)
 
     @PostMapping("/update-user")
     fun updateUserById(@Valid @RequestParam id: Long,
                        @Valid @RequestParam password: String): ResponseEntity<UserEntity> {
+
         try {
             val user = userRepository.getOne(id)
             user.password = password
@@ -38,9 +41,10 @@ class UserController (@Autowired private val userRepository: UserRepository,
     }
 
     @PostMapping("/delete-user")
-    fun deleteUserById(@Valid @RequestParam id: Long) {
+    fun deleteUserById(@Valid @RequestParam id: Long): ResponseEntity<String> {
         try {
             userRepository.deleteById(id)
+            return ResponseEntity.ok("User deleted successfully")
         } catch (e: Exception) {
             throw UserExceptionHandler.UserNotFoundException()
         }
