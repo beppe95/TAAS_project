@@ -157,8 +157,12 @@
             const modal = document.querySelector('#modal-google');
             M.Modal.getInstance(modal).close();
             loginGoogle.reset();
-        }).catch(e => {
-            loginGoogle.querySelector('.error').innerHTML = e.message;
+        }).catch((error) => {
+            var user = firebase.auth().currentUser;
+            if (error.code === 'auth/account-exists-with-different-credential') {
+                var pendingCred = error.credential;
+                user.linkWithCredential(pendingCred);
+            }
         });
     });
 
@@ -174,9 +178,15 @@
             const modal = document.querySelector('#modal-facebook');
             M.Modal.getInstance(modal).close();
             loginFacebook.reset();
-        }).catch(e => {
-            loginFacebook.querySelector('.error').innerHTML = e.message;
+        }).catch( (error) => {
+            var user = firebase.auth().currentUser;
+            if (error.code === 'auth/account-exists-with-different-credential') {
+                var pendingCred = error.credential;
+                user.linkWithCredential(pendingCred);
+            }
         });
+
     });
+
 
 
