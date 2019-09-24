@@ -3,7 +3,7 @@
     // listen for auth status changes
     auth.onAuthStateChanged(user => {
         if (user) {
-            db.collection('guides').onSnapshot(snapshot => {
+            db.collection('tournaments').onSnapshot(snapshot => {
                 setupGuides(snapshot.docs);
                 setupUI(user);
             }, err => console.log(err.message));
@@ -106,7 +106,7 @@
     e.preventDefault();
     const email = signupForm['signup-email'].value;
     const password = signupForm['signup-password'].value;
-    auth.createUserWithEmailAndPassword(email, password).then(cred => {
+    auth.createUserWithEmailAndPassword(email, password).then( () => {
         // close the signup modal & reset form
          const modal = document.querySelector('#modal-signup');
          M.Modal.getInstance(modal).close();

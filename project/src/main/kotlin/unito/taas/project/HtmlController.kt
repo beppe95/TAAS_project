@@ -5,16 +5,18 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
 import org.springframework.ui.set
 import org.springframework.validation.BindingResult
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.servlet.ModelAndView
 import unito.taas.project.user.UserEntity
+
 
 // @Restcontroller returns content, @Controller returns html and jsp pages
 
 @Controller
 //@ControllerAdvice
 class HtmlController {
-
     private val usersMap = HashMap<Long, UserEntity>()
 
 
