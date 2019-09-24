@@ -34,39 +34,78 @@
         }).catch(err => {
             console.log(err.message)
         });
-
-
-
-
     });
 
-    // create new guide
-    const createForm = document.querySelector('#create-form');
-    createForm.addEventListener('submit', (e) => {
+
+    // create new tournament
+    const tournamentForm = document.querySelector('#tournament-form');
+    var tournament_id;
+    tournamentForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        db.collection('guides').add({
-            title: createForm.title.value,
-            content: createForm.content.value
-        }).then(() => {
+        var user = firebase.auth().currentUser;
+        db.collection('tournaments').add({
+            user_id: user.uid,
+            players_number: tournamentForm.players_number.value,
+            tournament_description: tournamentForm.tournament_description.value,
+            tournament_mode: tournamentForm.tournament_mode.value
+        }).then((tournament) => {
             // close the create modal & reset form
-            const modal = document.querySelector('#modal-create');
+            tournament_id = tournament.id; // <--  TEMPORANEO ?
+            const modal = document.querySelector('#create-tournament');
             M.Modal.getInstance(modal).close();
-            createForm.reset();
+            tournamentForm.reset();
         }).catch(err => {
             console.log(err.message);
         });
     });
 
+    // create new match (takes previous tournament_id)
+    const matchForm = document.querySelector('#match-form');
+    var match_id;
+    matchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        db.collection('matches').add({
+            tournament_id: tournament_id,
+            match_datetime: matchForm.match_datetime.value,
+            following_match: null // MODIFICARE DOPO
+        }).then((match) => {
+            // close the create modal & reset form
+            match_id = match.id; // <--  TEMPORANEO ?
+            const modal = document.querySelector('#create-match');
+            M.Modal.getInstance(modal).close();
+            matchForm.reset();
+        }).catch(err => {
+            console.log(err.message);
+        });
+    });
+
+
+    // create new registration (takes previous match_id and user_id)
+    const registrationForm = document.querySelector('#registration-form');
+    registrationForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        var user = firebase.auth().currentUser;
+        console.log(match_id);
+        db.collection('registrations').add({
+            match_id: match_id,
+            user_id: user.uid,
+            outcome: null // MODIFICARE DOPO
+        }).then( () => {
+            // close the create modal & reset form
+            const modal = document.querySelector('#create-registration');
+            M.Modal.getInstance(modal).close();
+        }).catch(err => {
+            console.log(err.message);
+        });
+    });
+
+
     // signup
     const signupForm = document.querySelector('#signup-form');
     signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
-
-    // get user info
     const email = signupForm['signup-email'].value;
     const password = signupForm['signup-password'].value;
-
-    // sign up the user
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
         // close the signup modal & reset form
          const modal = document.querySelector('#modal-signup');
@@ -104,7 +143,6 @@
         }).catch(e => {
             loginForm.querySelector('.error').innerHTML = e.message;
         });
-
     });
 
 
@@ -139,7 +177,6 @@
         }).catch(e => {
             loginFacebook.querySelector('.error').innerHTML = e.message;
         });
-
     });
 
 

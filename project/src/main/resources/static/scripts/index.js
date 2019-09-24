@@ -53,5 +53,4 @@
 
         var items = document.querySelectorAll('.collapsible');
         M.Collapsible.init(items);
-
     });

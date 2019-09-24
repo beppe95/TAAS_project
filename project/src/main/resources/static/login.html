@@ -19,7 +19,13 @@
                     <a href="#" class="grey-text" id="logout">Logout</a>
                 </li>
                 <li class="logged-in" style="display: none">
-                    <a href="#" class="grey-text modal-trigger" data-target="modal-create">Create Guide</a>
+                    <a href="#" class="grey-text modal-trigger" data-target="create-tournament">Create Tournament</a>
+                </li>
+                <li class="logged-in" style="display: none">
+                    <a href="#" class="grey-text modal-trigger" data-target="create-match">Create Match</a>
+                </li>
+                <li class="logged-in" style="display: none">
+                    <a href="#" class="grey-text modal-trigger" data-target="create-registration">Create Registration</a>
                 </li>
                 <li class="logged-in" style="display: none">
                     <a href="#" class="grey-text modal-trigger" data-target="modal-update">Update Informations</a>
@@ -110,20 +116,49 @@
         </div>
     </div>
 
-    <!-- CREATE GUIDE MODAL -->
-    <div id="modal-create" class="modal">
+    <!-- CREATE TOURNAMENT MODAL -->
+    <div id="create-tournament" class="modal">
         <div class="modal-content">
-            <h4>Create Guide</h4><br />
-            <form id="create-form">
+            <h4>Create Tournament</h4><br />
+            <form id="tournament-form">
                 <div class="input-field">
-                    <input type="text" id="title" required>
-                    <label for="title">Guide Title</label>
+                    <input type="number" id="players_number" required>
+                    <label for="players_number">Players number</label>
                 </div>
                 <div class="input-field">
-                    <textarea id="content" class="materialize-textarea" required></textarea>
-                    <label for="content">Guide Content</label>
+                    <textarea id="tournament_description" class="materialize-textarea" required></textarea>
+                    <label for="tournament_description">Tournament description</label>
                 </div>
-                <button class="btn yellow darken-2 z-depth-0">Create</button>
+                <div class="input-field">
+                    <input type="text" id="tournament_mode" class="materialize-textarea">
+                    <label for="tournament_mode">Tournament mode</label>
+                </div>
+                <button class="btn yellow darken-2 z-depth-0">Create Tournament</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CREATE MATCHES MODAL -->
+    <div id="create-match" class="modal">
+        <div class="modal-content">
+            <h4>Create Matches (backend multiplier)</h4><br />
+            <form id="match-form">
+                <div class="input-field">
+                    <input type="datetime-local" id="match_datetime" required>
+                    <label for="match_datetime">Match date and time</label>
+                </div>
+                <button class="btn yellow darken-2 z-depth-0"> Create Matches (backend multiplier) </button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- CREATE REGISTRATION MODAL -->
+    <div id="create-registration" class="modal">
+        <div class="modal-content">
+            <h4>Create Registration</h4><br />
+            <form id="registration-form">
+                <button class="btn yellow darken-2 z-depth-0"> Create Registration </button>
             </form>
         </div>
     </div>
