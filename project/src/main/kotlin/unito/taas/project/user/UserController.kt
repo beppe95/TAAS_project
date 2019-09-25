@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*
 import unito.taas.project.HtmlController
 import java.util.*
 import javax.validation.Valid
-
+/*
 @RestController
 @RequestMapping("/api")
 class UserController (@Autowired private val userRepository: UserRepository,
@@ -51,3 +51,5 @@ class UserController (@Autowired private val userRepository: UserRepository,
     }
 
 }
+
+ */
