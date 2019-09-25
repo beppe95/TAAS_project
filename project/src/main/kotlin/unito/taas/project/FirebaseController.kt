@@ -1,9 +1,7 @@
-package unito.taas.project
+package unito.taas.project.unito.taas.project
 
 import com.google.firebase.FirebaseApp
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.ResponseEntity
-import com.google.api.core.ApiFuture
 import com.google.cloud.firestore.*
 import org.springframework.web.bind.annotation.*
 
