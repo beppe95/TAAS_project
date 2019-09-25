@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
 import org.hibernate.exception.ConstraintViolationException
 import javax.persistence.EntityNotFoundException
-
+/*
 @ControllerAdvice
 class UserExceptionHandler {
 
@@ -33,4 +33,4 @@ class UserExceptionHandler {
                 .status(HttpStatus.FORBIDDEN)
                 .body("Operation Not Allowed")
     }
-}
+} */
