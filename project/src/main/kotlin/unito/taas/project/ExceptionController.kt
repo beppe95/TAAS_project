@@ -1,4 +1,4 @@
-package unito.taas.project.unito.taas.project
+package unito.taas.project
 
 import com.google.firebase.auth.FirebaseAuthException
 import org.springframework.http.ResponseEntity
