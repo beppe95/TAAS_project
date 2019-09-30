@@ -9,11 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.servlet.ModelAndView
-import unito.taas.project.user.UserEntity
 
 
 // @Restcontroller returns content, @Controller returns html and jsp pages
-
+/*
 @Controller
 //@ControllerAdvice
 class HtmlController {
@@ -26,6 +25,8 @@ class HtmlController {
         modelAndView.viewName = "login.html"
         return modelAndView
     }
+
+ */
 
     /*
        https://stackoverflow.com/questions/8688135/modelattribute-annotation-when-to-use-it/26916920#26916920
@@ -42,7 +43,7 @@ class HtmlController {
         * the controller methods.
         *
     */
-
+/*
     @ModelAttribute
     fun addEasterEgg(model: ModelMap) {
         model["easterEgg"] = UserEntity(42, "Babbo", "Natale")
@@ -58,3 +59,4 @@ class HtmlController {
         return ResponseEntity.ok(usersMap[user.id!!]!!)
     }
 }
+ */

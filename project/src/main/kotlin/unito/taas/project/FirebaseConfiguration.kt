@@ -13,13 +13,10 @@ import java.io.FileInputStream
 
 @Configuration
 class FirebaseConfiguration {
-    // migliorabile
-    // private val serviceAccount = FileInputStream("D:\\Projects\\TAAS_project\\project\\src\\main\\resources\\unito-taas-project-firebase-adminsdk.json")
 
     @Bean
     fun app(): FirebaseApp {
         val options = FirebaseOptions.Builder()
-                // .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .setCredentials(GoogleCredentials.getApplicationDefault())
                 .build()!!
         return FirebaseApp.initializeApp(options)
