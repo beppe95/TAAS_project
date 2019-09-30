@@ -12,11 +12,11 @@ import org.springframework.web.servlet.ModelAndView
 
 
 // @Restcontroller returns content, @Controller returns html and jsp pages
-/*
+
 @Controller
 //@ControllerAdvice
 class HtmlController {
-    private val usersMap = HashMap<Long, UserEntity>()
+    // private val usersMap = HashMap<Long, UserEntity>()
 
 
     @GetMapping("/login")
@@ -26,7 +26,7 @@ class HtmlController {
         return modelAndView
     }
 
- */
+
 
     /*
        https://stackoverflow.com/questions/8688135/modelattribute-annotation-when-to-use-it/26916920#26916920
@@ -58,5 +58,6 @@ class HtmlController {
 
         return ResponseEntity.ok(usersMap[user.id!!]!!)
     }
+    */
 }
- */
+
