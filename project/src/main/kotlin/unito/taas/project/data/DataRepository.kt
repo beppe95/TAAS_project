@@ -2,19 +2,24 @@ package unito.taas.project.data
 
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.rest.core.annotation.RepositoryRestResource
+import org.springframework.format.annotation.DateTimeFormat
 import java.util.*
 
-@RepositoryRestResource(path="tournament")
+@RepositoryRestResource(path = "tournament")
 interface TournamentRepository : JpaRepository<TournamentEntity, Long>
 
-@RepositoryRestResource(path="match")
-interface MatchRepository : JpaRepository<MatchEntity, Long>
-
-@RepositoryRestResource(path="registration")
+@RepositoryRestResource(path = "registration")
 interface RegistrationRepository : JpaRepository<RegistrationEntity, Long>
 
-@RepositoryRestResource(path="game")
-interface GameRepository : JpaRepository<GameEntity, Long>
+@RepositoryRestResource(path = "game")
+interface GameRepository : JpaRepository<GameEntity, Long> {
+    fun findGameEntitiesByGameName(gameName: String)
+}
+
+@RepositoryRestResource(path = "match")
+interface MatchRepository : JpaRepository<MatchEntity, Long> {
+    fun findMatchesByMatchDateTimeIsAfterAndTournamentInvolvedPlayersNumberGreaterThan(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) matchDateTime: Date, tournamentInvolved_playersNumber: Int)
+}
 
 /*
 

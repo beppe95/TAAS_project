@@ -26,10 +26,10 @@ class AuthenticationController(@Autowired private val app: FirebaseApp,
                    @RequestParam photoURL: String): Array<out UserInfo>? {
 
         val user = auth.createUser(CreateRequest()
-                                    .setEmail(email)
-                                    .setPassword(password)
-                                    .setDisplayName(nickname)
-                                    .setPhotoUrl(photoURL)).providerData
+                .setEmail(email)
+                .setPassword(password)
+                .setDisplayName(nickname)
+                .setPhotoUrl(photoURL)).providerData
 
         auth.generateEmailVerificationLink(email)
 
@@ -56,7 +56,7 @@ class AuthenticationController(@Autowired private val app: FirebaseApp,
     @PostMapping("verify-claims/", produces = ["application/json"])
     fun verifyClaims(@RequestParam email: String): Any? {
         val user = auth.getUserByEmail(email)
-        val claims= user.customClaims
+        val claims = user.customClaims
         return claims["subscriber"]
     }
 

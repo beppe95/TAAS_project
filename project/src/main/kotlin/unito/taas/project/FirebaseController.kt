@@ -34,14 +34,14 @@ class FirebaseController(@Autowired private val app: FirebaseApp,
     fun createTournament(@RequestParam players_number: Int,
                          @RequestParam tournament_mode: String,
                          @RequestParam tournament_description: String //, user_id: String
-                                       ): HashMap<String, Any> =
-                HashMap<String, Any>().apply {
-                    this["players_number"] = players_number
-                    this["tournament_mode"] = tournament_mode
-                    this["tournament_description"] = tournament_description
-                    // this["user_id"] = user_id
-                    firestore.collection("tournaments").add(this)
-                }
+    ): HashMap<String, Any> =
+            HashMap<String, Any>().apply {
+                this["players_number"] = players_number
+                this["tournament_mode"] = tournament_mode
+                this["tournament_description"] = tournament_description
+                // this["user_id"] = user_id
+                firestore.collection("tournaments").add(this)
+            }
 
     @PostMapping("create-match", produces = ["application/json"])
     fun createMatch(@RequestParam tournament_id: Int,
@@ -57,8 +57,8 @@ class FirebaseController(@Autowired private val app: FirebaseApp,
 
     @PostMapping("create-registration", produces = ["application/json"])
     fun createRegistration(@RequestParam match_id: String,
-                    @RequestParam user_id: String,
-                    @RequestParam outcome: String): HashMap<String, Any> =
+                           @RequestParam user_id: String,
+                           @RequestParam outcome: String): HashMap<String, Any> =
             HashMap<String, Any>().apply {
                 this["match_id"] = match_id
                 this["user_id"] = user_id

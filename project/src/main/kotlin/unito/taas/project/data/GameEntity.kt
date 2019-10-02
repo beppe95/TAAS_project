@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue
 import javax.validation.constraints.NotBlank
 
 @Entity
-class GameEntity(@Id @GeneratedValue val id: Long,
-                 @NotBlank val availableModes: String,
-                 @NotBlank val image: String)
+class GameEntity(
+        @Id @GeneratedValue val id: Long,
+        @NotBlank val gameName: String,
+        @NotBlank val availableModes: String,
+        @NotBlank val image: String
+)
