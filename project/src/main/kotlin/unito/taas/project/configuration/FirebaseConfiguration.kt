@@ -1,4 +1,4 @@
-package unito.taas.project
+package unito.taas.project.configuration
 
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.cloud.firestore.Firestore

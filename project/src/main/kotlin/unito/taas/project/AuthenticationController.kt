@@ -3,6 +3,7 @@ package unito.taas.project
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserInfo
+import com.google.firebase.auth.UserRecord
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController
@@ -43,5 +44,20 @@ class AuthenticationController(@Autowired private val app: FirebaseApp,
         return auth.generatePasswordResetLink("cesareiurlaro@gmail.com")
     }
 
+    @PostMapping("grants-claims/", produces = ["application/json"])
+    fun grantsClaims(@RequestParam email: String): UserRecord? {
+        val user = auth.getUserByEmail(email)
+        val claims = HashMap<String, Any>()
+        claims["subscriber"] = true
+        auth.setCustomUserClaims(user.uid, claims)
+        return user
+    }
+
+    @PostMapping("verify-claims/", produces = ["application/json"])
+    fun verifyClaims(@RequestParam email: String): Any? {
+        val user = auth.getUserByEmail(email)
+        val claims= user.customClaims
+        return claims["subscriber"]
+    }
 
 }

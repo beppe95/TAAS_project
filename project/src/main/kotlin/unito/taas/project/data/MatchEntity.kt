@@ -1,12 +1,9 @@
 package unito.taas.project.data
 
 import java.util.*
-import javax.persistence.Id
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.validation.constraints.NotBlank
+import javax.persistence.*
 
 @Entity
 class MatchEntity (@Id @GeneratedValue val id: Long,
-                   @NotBlank val matchDateTime: Date,
-                   @NotBlank val tournamentInvolved: Long)
+                   val matchDateTime: Date,
+                   @ManyToOne(fetch= FetchType.LAZY) @JoinColumn(name="tournament_id") val tournamentInvolved: TournamentEntity)
