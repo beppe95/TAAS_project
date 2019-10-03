@@ -11,6 +11,6 @@ import javax.validation.constraints.NotBlank
 @Entity
 class MatchEntity(
         @Id @GeneratedValue val id: Long,
-        @NotBlank val matchDateTime: LocalDateTime,
+        @NotBlank @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") val matchDateTime: LocalDateTime,
         @NotBlank @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "tournament_id") val tournamentInvolved: TournamentEntity
 )

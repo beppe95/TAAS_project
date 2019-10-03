@@ -19,7 +19,7 @@ class AuthenticationController(@Autowired private val app: FirebaseApp,
 
     // tenere pwd? + spiegazione https://github.com/firebase/firebaseui-web/issues/122
 
-    @PostMapping("create-user/", produces = ["application/json"])
+    @PostMapping("create-user", produces = ["application/json"])
     fun createUser(@RequestParam email: String,
                    @RequestParam password: String,
                    @RequestParam nickname: String,
@@ -36,7 +36,7 @@ class AuthenticationController(@Autowired private val app: FirebaseApp,
         return user
     }
 
-    @GetMapping("reset-user-password/", produces = ["application/json"])
+    @GetMapping("reset-user-password", produces = ["application/json"])
     fun resetUserPassword(): String? {
 
         // confrontare uid e mail
@@ -44,7 +44,7 @@ class AuthenticationController(@Autowired private val app: FirebaseApp,
         return auth.generatePasswordResetLink("cesareiurlaro@gmail.com")
     }
 
-    @PostMapping("grants-claims/", produces = ["application/json"])
+    @PostMapping("grants-claims", produces = ["application/json"])
     fun grantsClaims(@RequestParam email: String): UserRecord? {
         val user = auth.getUserByEmail(email)
         val claims = HashMap<String, Any>()
@@ -53,7 +53,7 @@ class AuthenticationController(@Autowired private val app: FirebaseApp,
         return user
     }
 
-    @PostMapping("verify-claims/", produces = ["application/json"])
+    @PostMapping("verify-claims", produces = ["application/json"])
     fun verifyClaims(@RequestParam email: String): Any? {
         val user = auth.getUserByEmail(email)
         val claims = user.customClaims

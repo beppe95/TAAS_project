@@ -19,23 +19,23 @@ interface RegistrationRepository : JpaRepository<RegistrationEntity, Long>
 interface GameRepository : JpaRepository<GameEntity, Long> {
     @RestResource(path="byName")
     fun findGameEntitiesByGameName(gameName: String) : List<GameEntity>
+    // http://localhost:8080/game/search/byName?gameName=CS
 }
-
-// http://localhost:8080/game/search/byName?gameName=CS
 
 @RepositoryRestResource(path = "match")
 interface MatchRepository : JpaRepository<MatchEntity, Long> {
 
-// fun findMatchEntitiesByMatchDateTimeIsAfterAndTournamentInvolvedPlayersNumberGreaterThan(@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") matchDateTime: LocalDateTime, tournamentInvolved_playersNumber: Int)
-/*
+    @RestResource(path="availableMatches")
+    fun findMatchEntitiesByMatchDateTimeIsAfterAndTournamentInvolved_PlayersNumberGreaterThan(@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") matchDateTime: LocalDateTime, tournamentInvolved_playersNumber: Int) : List<MatchEntity>
+    // http://localhost:8080/match/search/availableMatches?matchDateTime=1977-12-03T11:15:30&tournamentInvolved_playersNumber=1
+
+
     @RestResource(path="byMatchDateTimeIsAfter")
-    fun findMatchEntitiesByMatchDateTimeIsAfter(@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") matchDateTime: LocalDateTime)
- */
+    fun findMatchEntitiesByMatchDateTimeIsAfter(@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") matchDateTime: LocalDateTime) : List<MatchEntity>
+    // http://localhost:8080/match/search/byMatchDateTimeIsAfter?matchDateTime=1977-12-03T11:15:30
 
     @RestResource(path="byPlayersNumberGreaterThan")
     fun findMatchEntitiesByTournamentInvolved_PlayersNumberGreaterThan(tournamentInvolved_playersNumber: Int) : List<MatchEntity>
-
-    // query funzionante:
     //http://localhost:8080/match/search/byPlayersNumberGreaterThan?tournamentInvolved_playersNumber=33
 
 }
