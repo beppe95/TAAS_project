@@ -44,6 +44,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("com.google.firebase:firebase-admin:6.10.0")
 
+
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2:1.4.197")
 	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
