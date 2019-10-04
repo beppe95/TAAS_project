@@ -9,14 +9,14 @@ import java.time.LocalDateTime
 @RepositoryRestResource(path = "game")
 interface GameRepository : JpaRepository<GameEntity, String> {
 
-    @RestResource(path = "byName")
-    fun getGameEntityByGameName(gameName: String): GameEntity
+    @RestResource(path = "byGameName")
+    fun getGameEntityByGameNameIgnoreCase(gameName: String): GameEntity
 
     @RestResource(path = "byGameNameStartsWith")
-    fun getGameEntitiesByGameNameStartsWith(gameName: String): List<GameEntity>
+    fun getGameEntitiesByGameNameStartsWithIgnoreCase(gameName: String): List<GameEntity>
 
-    @RestResource(path = "byGameNameIsLike")
-    fun getGameEntitiesByGameNameContaining(gameName: String): List<GameEntity>
+    @RestResource(path = "byGameNameContaining")
+    fun getGameEntitiesByGameNameContainingIgnoreCase(gameName: String): List<GameEntity>
 
 }
 
@@ -27,7 +27,7 @@ interface TournamentRepository : JpaRepository<TournamentEntity, Long> {
     fun getTournamentEntitiesByGame(game: GameEntity): List<TournamentEntity>
 
     @RestResource(path = "byMode")
-    fun getTournamentEntitiesByTournamentMode(tournamentMode: String): List<TournamentEntity>
+    fun getTournamentEntitiesByTournamentModeIgnoreCase(tournamentMode: String): List<TournamentEntity>
 
 }
 
@@ -45,11 +45,11 @@ interface MatchRepository : JpaRepository<MatchEntity, Long> {
             @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") matchDateTime: LocalDateTime): List<MatchEntity>
 
     @RestResource(path = "availableMatches")
-    fun findMatchEntitiesByMatchDateTimeIsAfterAndTournament_PlayersNumberGreaterThan(
+    fun getMatchEntitiesByMatchDateTimeIsAfterAndTournament_PlayersNumberGreaterThan(
             @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") matchDateTime: LocalDateTime,
             tournament_playersNumber: Int): List<MatchEntity>
 
-    @RestResource(path = "countByAvailabilty")
+    @RestResource(path = "countAvailableMatch")
     fun countByMatchDateTimeIsAfterAndTournament_PlayersNumberGreaterThan(
             @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") matchDateTime: LocalDateTime,
             tournament_playersNumber: Int): Int
