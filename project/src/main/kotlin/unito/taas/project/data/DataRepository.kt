@@ -6,46 +6,66 @@ import org.springframework.data.rest.core.annotation.RestResource
 import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDateTime
 
-@RepositoryRestResource(path="tournament")
-interface TournamentRepository : JpaRepository<TournamentEntity, Long>
+@RepositoryRestResource(path = "game")
+interface GameRepository : JpaRepository<GameEntity, String> {
 
-@RepositoryRestResource(path="registration")
-interface RegistrationRepository : JpaRepository<RegistrationEntity, Long>{
-    @RestResource(path="byNumberRegistration")
-    fun countByMatchId_TournamentInvolved_Id(MatchId_TournamentInvolved_Id: Long) : Int
+    @RestResource(path = "byName")
+    fun getGameEntityByGameName(gameName: String): GameEntity
+
+    @RestResource(path = "byGameNameStartsWith")
+    fun getGameEntitiesByGameNameStartsWith(gameName: String): List<GameEntity>
+
+    @RestResource(path = "byGameNameIsLike")
+    fun getGameEntitiesByGameNameContaining(gameName: String): List<GameEntity>
+
 }
 
+@RepositoryRestResource(path = "tournament")
+interface TournamentRepository : JpaRepository<TournamentEntity, Long> {
 
-@RepositoryRestResource(path="game")
-interface GameRepository : JpaRepository<GameEntity, Long> {
-    @RestResource(path="byName")
-    fun findGameEntitiesByGameName(gameName: String) : List<GameEntity>
-    // http://localhost:8080/game/search/byName?gameName=CS
+    @RestResource(path = "byGame")
+    fun getTournamentEntitiesByGame(game: GameEntity): List<TournamentEntity>
+
+    @RestResource(path = "byMode")
+    fun getTournamentEntitiesByTournamentMode(tournamentMode: String): List<TournamentEntity>
+
 }
 
 @RepositoryRestResource(path = "match")
 interface MatchRepository : JpaRepository<MatchEntity, Long> {
 
-    @RestResource(path="availableMatches")
-    fun findMatchEntitiesByMatchDateTimeIsAfterAndTournamentInvolved_PlayersNumberGreaterThan
-            (@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss") matchDateTime: LocalDateTime,
-             tournamentInvolved_playersNumber: Int) : List<MatchEntity>
-    // http://localhost:8080/match/search/availableMatches?matchDateTime=1977-12-03T11:15:30&tournamentInvolved_playersNumber=1
+    @RestResource(path = "byTournament")
+    fun getMatchEntitiesByTournament(tournament: TournamentEntity): List<MatchEntity>
 
+    @RestResource(path = "byGame")
+    fun getMatchEntitiesByTournament_Game(game: GameEntity): List<MatchEntity>
 
-    @RestResource(path="byMatchDateTimeIsAfter")
-    fun findMatchEntitiesByMatchDateTimeIsAfter(
-            @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss") matchDateTime: LocalDateTime) : List<MatchEntity>
-    // http://localhost:8080/match/search/byMatchDateTimeIsAfter?matchDateTime=1977-12-03T11:15:30
+    @RestResource(path = "byMatchDateTimeIsAfter")
+    fun getMatchEntitiesByMatchDateTimeIsAfter(
+            @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") matchDateTime: LocalDateTime): List<MatchEntity>
 
-    @RestResource(path="byPlayersNumberGreaterThan")
-    fun findMatchEntitiesByTournamentInvolved_PlayersNumberGreaterThan(
-            tournamentInvolved_playersNumber: Int) : List<MatchEntity>
-    //http://localhost:8080/match/search/byPlayersNumberGreaterThan?tournamentInvolved_playersNumber=33
+    @RestResource(path = "availableMatches")
+    fun findMatchEntitiesByMatchDateTimeIsAfterAndTournament_PlayersNumberGreaterThan(
+            @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") matchDateTime: LocalDateTime,
+            tournament_playersNumber: Int): List<MatchEntity>
 
-    @RestResource(path="countByAvailabilty")
-    fun countByMatchDateTimeIsAfterAndTournamentInvolved_PlayersNumberGreaterThan
-            (@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss") matchDateTime: LocalDateTime,
-             tournamentInvolved_playersNumber: Int) : Int
+    @RestResource(path = "countByAvailabilty")
+    fun countByMatchDateTimeIsAfterAndTournament_PlayersNumberGreaterThan(
+            @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") matchDateTime: LocalDateTime,
+            tournament_playersNumber: Int): Int
+
+}
+
+@RepositoryRestResource(path = "registration")
+interface RegistrationRepository : JpaRepository<RegistrationEntity, Long> {
+
+    @RestResource(path = "byNumberRegistration")
+    fun countByMatch_Tournament_Id(Match_Tournament_Id: Long): Int
+
+    @RestResource(path = "byNumberRegistration1")
+    fun countByMatch_Tournament(Match_Tournament: TournamentEntity): Int
+
+    @RestResource(path = "byMatch")
+    fun getRegistrationEntitiesByMatch(Match: MatchEntity): List<RegistrationEntity>
 
 }
