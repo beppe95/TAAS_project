@@ -4,11 +4,12 @@ import javax.persistence.*
 import javax.validation.constraints.NotBlank
 
 @Entity
-class TournamentEntity(
+data class TournamentEntity(
         @Id @GeneratedValue val id: Long,
         @NotBlank val playersNumber: Int,
         @NotBlank val tournamentDescription: String,
         @NotBlank val tournamentMode: String,
-        @NotBlank val adminId: Long,
-        @NotBlank @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "game") val game: GameEntity
+        @NotBlank val title: String,
+        @NotBlank @ManyToOne @JoinColumn(name = "admin") val admin: UserEntity,
+        @NotBlank @ManyToOne @JoinColumn(name = "game") val game: GameEntity
 )

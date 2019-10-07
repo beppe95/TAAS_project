@@ -36,6 +36,7 @@ class AuthenticationController(@Autowired private val app: FirebaseApp,
         return user
     }
 
+
     @GetMapping("reset-user-password", produces = ["application/json"])
     fun resetUserPassword(): String? {
 

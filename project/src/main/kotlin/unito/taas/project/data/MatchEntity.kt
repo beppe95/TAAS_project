@@ -6,8 +6,8 @@ import javax.persistence.*
 import javax.validation.constraints.NotBlank
 
 @Entity
-class MatchEntity(
+data class MatchEntity(
         @Id @GeneratedValue val id: Long,
         @NotBlank @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") val matchDateTime: LocalDateTime,
-        @NotBlank @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "tournament") val tournament: TournamentEntity
+        @NotBlank @ManyToOne @JoinColumn(name = "tournament") val tournament: TournamentEntity
 )

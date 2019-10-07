@@ -69,3 +69,6 @@ interface RegistrationRepository : JpaRepository<RegistrationEntity, Long> {
     fun getRegistrationEntitiesByMatch(Match: MatchEntity): List<RegistrationEntity>
 
 }
+
+@RepositoryRestResource(path = "user")
+interface UserRepository : JpaRepository<UserEntity, String>

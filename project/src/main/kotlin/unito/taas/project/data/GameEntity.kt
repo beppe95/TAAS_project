@@ -5,7 +5,7 @@ import javax.persistence.Id
 import javax.validation.constraints.NotBlank
 
 @Entity
-class GameEntity(
+data class GameEntity(
         @Id @NotBlank val gameName: String,
         @NotBlank val availableModes: String,
         @NotBlank val image: String

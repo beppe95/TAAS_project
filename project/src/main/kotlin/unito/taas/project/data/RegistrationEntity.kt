@@ -4,9 +4,9 @@ import javax.persistence.*
 import javax.validation.constraints.NotBlank
 
 @Entity
-class RegistrationEntity(
+data class RegistrationEntity(
         @Id @GeneratedValue val id: Long,
-        @NotBlank val userId: String,
-        @NotBlank @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "match") val match: MatchEntity,
+        @NotBlank @ManyToOne @JoinColumn(name = "match") val match: MatchEntity,
+        @NotBlank @ManyToOne @JoinColumn(name = "user_id") val user: UserEntity,
         @NotBlank val outcome: String
 )

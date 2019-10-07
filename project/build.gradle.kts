@@ -45,8 +45,8 @@ dependencies {
 	implementation("com.google.firebase:firebase-admin:6.10.0")
 
 
-	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	runtimeOnly("com.h2database:h2:1.4.197")
+	// developmentOnly("org.springframework.boot:spring-boot-devtools")
+	runtime("com.h2database:h2:1.4.197")
 	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
