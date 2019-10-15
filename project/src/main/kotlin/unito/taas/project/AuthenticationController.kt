@@ -8,8 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController
 import com.google.firebase.auth.UserRecord.CreateRequest
+import com.google.gson.JsonElement
+import com.google.gson.JsonObject
+import com.google.gson.stream.JsonWriter
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
+import java.io.Writer
 
 
 @RestController
@@ -54,11 +58,16 @@ class AuthenticationController(@Autowired private val app: FirebaseApp,
         return user
     }
 
-    @PostMapping("verify-claims", produces = ["application/json"])
-    fun verifyClaims(@RequestParam email: String): Any? {
+    @PostMapping("subscription-status", produces = ["application/json"])
+    fun subscriptionStatus(@RequestParam email: String): Any? {
         val user = auth.getUserByEmail(email)
-        val claims = user.customClaims
-        return claims["subscriber"]
+        return user.customClaims
+    }
+
+    @PostMapping("verification-status", produces = ["application/json"])
+    fun verificationStatus(@RequestParam email: String): Any? {
+        val user = auth.getUserByEmail(email)
+        return hashMapOf("verified" to user.isEmailVerified)
     }
 
 }

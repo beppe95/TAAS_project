@@ -10,5 +10,6 @@ data class UserEntity(
         @NotBlank val email: String,
         @NotBlank val nickname: String,
         @NotBlank val image: String? = null,
+        @NotBlank val isVerified: Boolean,
         @NotBlank val isSubscriber: Boolean
 )
