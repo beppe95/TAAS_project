@@ -72,3 +72,6 @@ interface RegistrationRepository : JpaRepository<RegistrationEntity, Long> {
 
 @RepositoryRestResource(path = "user")
 interface UserRepository : JpaRepository<UserEntity, String>
+
+@RepositoryRestResource(path = "mode")
+interface ModeRepository : JpaRepository<ModeEntity, String>
