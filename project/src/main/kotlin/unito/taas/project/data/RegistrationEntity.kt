@@ -6,7 +6,6 @@ import javax.validation.constraints.NotBlank
 @Entity
 data class RegistrationEntity(
         @Id @GeneratedValue val id: Long,
-        @NotBlank @ManyToOne @JoinColumn(name = "match") val match: MatchEntity,
-        @NotBlank @ManyToOne @JoinColumn(name = "user") val user: UserEntity,
-        @NotBlank val outcome: String
+        @NotBlank @JoinColumn(name = "user") val user: String,
+        val outcome: String?
 )
